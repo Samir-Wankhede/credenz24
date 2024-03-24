@@ -1,0 +1,30 @@
+.wave-icon {
+    display: inline-block;
+    position: relative;
+    width: 60px;
+    height: 60px;
+  }
+  
+  .wave {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #007bff; /* Blue color, change as needed */
+    animation: wave-animation 1.5s infinite ease-out;
+  }
+  
+  @keyframes wave-animation {
+    0% {
+      transform: scale(0.7);
+      opacity: 0.6;
+    }
+    50% {
+      transform: scale(1.2);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(0.7);
+      opacity: 0.6;
+    }
+  }
