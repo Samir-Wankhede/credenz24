@@ -4,10 +4,11 @@ import React, { Suspense, useEffect, useState,useRef } from 'react'
 import Experience from './Experience'
 import LoadPage from '../loading/LoadPage'
 import './Experience.css'
-import Transition from './Transition.jsx'
+import Transition from '../Transition.jsx'
 import gsap from "gsap"
 import { useGSAP } from '@gsap/react'
 import { easing } from 'maath'
+import { Navigate, redirect } from 'react-router-dom'
 
 
 
@@ -23,22 +24,17 @@ export default function Landing() {
     console.log("NODES:",nodes)
     console.log("SUB:",nodes.Sub)
 
-    function UnderWater(){
-        useFrame((state, delta) => {
-          state.camera.lookAt(-10,0,1)
-          easing.damp3(state.camera.position, [-2,0.5,1] ,0.5, delta)
-          return  null
-    })}
 
     useGSAP(()=>{
         console.log("SUBMARINE")
         console.log("current:",sub.current)
         if(exploreUnderwater){
         gsap.to(nodes.Sub.position,{
-            y:-100,
-            duration:50,
+            y:-9,
+            duration:9,
             ease:"none"
         })
+        redirect('/underwater')
     }
     },[exploreUnderwater])
 
@@ -90,6 +86,7 @@ export default function Landing() {
         </Suspense>
         {/* {exploreUnderwater && <UnderWater/>} */}
         {/* {exploreUnderwater && <Transition/>} */}
+        {/* {exploreUnderwater && <Navigate to='/underwater'/>} */}
     </Canvas> 
   </>
   )

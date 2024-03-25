@@ -1,9 +1,10 @@
 import { useFrame, usePointerEvents } from '@react-three/fiber'
 import React, { useState, useEffect } from 'react'
 import {easing} from 'maath'
-import { OrbitControls } from '@react-three/drei'
+import { Html, OrbitControls } from '@react-three/drei'
 import { isMobile } from 'react-device-detect'
 import MainModel from '../../models/MainModel'
+import { Navigate,redirect } from 'react-router-dom'
 
 export default function Experience({explore,exploreUW}) {
     console.log(exploreUW)
@@ -12,21 +13,28 @@ export default function Experience({explore,exploreUW}) {
     const [cameraPosition, setCameraPosition]=useState(camera)
     const [isPhone,setIsPhone]=useState(isMobile)
 
+    function GoToUnderWater(){
+        useEffect(()=>{
+            setTimeout(()=>{redirect('/underwater')},3000)
+        },[])
+        return <Html></Html>
+    }
+
     function Rig(){
         useFrame((state, delta) => {
             state.camera.lookAt(0, 0, 0)
             easing.damp3(state.camera.position, [cameraPosition.x + state.mouse.x , cameraPosition.y + state.mouse.y / 1, cameraPosition.z], rigSpeed, delta)
           })
         return null
-      
     }
 
     function UnderWater(){
         useFrame((state, delta) => {
           state.camera.lookAt(-6,0.5,9)
           easing.damp3(state.camera.position, [-5,0.5,10] ,0.5, delta)
-          return  null
-    })}
+        })
+        return null
+    }
    
     useEffect(() => {
         const timeout = setTimeout(() => {
