@@ -5,7 +5,7 @@ import Experience from './Experience'
 import LoadPage from '../loading/LoadPage'
 import './Experience.css'
 
-export default function Landing() {
+export default function UnderWater() {
     const [explore,setExplore]=useState(false)
     const [showToggle,setShowToggle]=useState(false)
     const {progress}=useProgress()

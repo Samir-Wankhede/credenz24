@@ -8,7 +8,7 @@ import Transition from '../Transition.jsx'
 import gsap from "gsap"
 import { useGSAP } from '@gsap/react'
 import { easing } from 'maath'
-import { Navigate, redirect } from 'react-router-dom'
+import { Navigate, redirect,useNavigate} from 'react-router-dom'
 
 
 
@@ -17,13 +17,16 @@ export default function Landing() {
     const [exploreUnderwater,setExploreUnderwater]=useState(false)
     const [showToggle,setShowToggle]=useState(false)
     const {progress}=useProgress()
-
+    const navigate=useNavigate()
     const sub=useRef()
     console.log(sub.current)
     const { nodes, materials } = useGLTF('/models/credenz_baked.glb')
     console.log("NODES:",nodes)
     console.log("SUB:",nodes.Sub)
 
+    const redirectToNewPage = () => {
+        navigate('/underwater');
+      };
 
     useGSAP(()=>{
         console.log("SUBMARINE")
@@ -31,8 +34,9 @@ export default function Landing() {
         if(exploreUnderwater){
         gsap.to(nodes.Sub.position,{
             y:-9,
-            duration:9,
-            ease:"none"
+            duration:7,
+            ease:"none",
+            onComplete: redirectToNewPage
         })
         redirect('/underwater')
     }
