@@ -5,7 +5,8 @@ import { OrbitControls } from '@react-three/drei'
 import { isMobile } from 'react-device-detect'
 import MainModel from '../../models/MainModel'
 
-export default function Experience({explore}) {
+export default function Experience({explore,exploreUW}) {
+    console.log(exploreUW)
     let camera={x:0,y:2.5,z:11}
     const [rigSpeed, setRigSpeed]=useState(1.5)
     const [cameraPosition, setCameraPosition]=useState(camera)
@@ -19,6 +20,13 @@ export default function Experience({explore}) {
         return null
       
     }
+
+    function UnderWater(){
+        useFrame((state, delta) => {
+          state.camera.lookAt(-6,0.5,9)
+          easing.damp3(state.camera.position, [-5,0.5,10] ,0.5, delta)
+          return  null
+    })}
    
     useEffect(() => {
         const timeout = setTimeout(() => {
@@ -72,6 +80,10 @@ export default function Experience({explore}) {
         }
         if (isPhone){
             return <MobileController/>
+        }
+        if(exploreUW){
+            console.log("Reached")
+            return <UnderWater/>
         }
         else{
             console.log('here2')
