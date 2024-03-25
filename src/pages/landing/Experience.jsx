@@ -44,6 +44,7 @@ export default function Experience({explore}) {
         makeDefault
         />
     }
+    
 
     function PCController(){
         let stopDamp = false;
@@ -51,7 +52,9 @@ export default function Experience({explore}) {
         stopDamp = true;
         }, 3000)
         useFrame((state, delta) => {
-            !stopDamp && easing.damp3(state.camera.position, [5,12,13], 2, delta)
+            // 5,6.5,13
+            
+            !stopDamp && easing.damp3(state.camera.position, [5,6.5,13], 2, delta)
         })
 
         return <OrbitControls 
