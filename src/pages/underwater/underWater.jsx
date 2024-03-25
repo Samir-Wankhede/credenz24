@@ -16,7 +16,7 @@ export default function Landing() {
 
   return (
     <>
-    {showToggle && 
+    {
         <div className='toggle-div'>
             <div className='container'>
                 <input type='checkbox' name='checkbox' value='checkbox' 
