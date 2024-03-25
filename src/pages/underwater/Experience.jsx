@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 //import { OrbitControls, useGLTF } from '@react-three/drei'
 //import { isMobile } from 'react-device-detect'
 import MainModel from '../../models/Submarine'
+import { OrbitControls } from '@react-three/drei'
 
 
 export default function Experience() {
@@ -15,7 +16,6 @@ export default function Experience() {
   return (
     <>
     {/* model */}
-    
     <MainModel />
     <directionalLight color={"white"} intensity={1.5} position={[0,0,20]}/>
     <ambientLight intensity={1.5}/>
