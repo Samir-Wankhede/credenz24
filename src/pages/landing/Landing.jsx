@@ -1,6 +1,6 @@
-import { Environment, useProgress } from '@react-three/drei'
+import { Environment, useProgress, useGLTF } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
-import React, { Suspense, useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState,useRef} from 'react'
 import Experience from './Experience'
 import LoadPage from '../loading/LoadPage'
 import './Experience.css'
@@ -19,7 +19,7 @@ export default function Landing() {
     const navigate=useNavigate()
     const sub=useRef()
     console.log(sub.current)
-    const { nodes, materials } = useGLTF('/models/credenz_baked.glb')
+    const { nodes, materials } = useGLTF('/models/credenz_plzBeFinal.glb')
     console.log("NODES:",nodes)
     console.log("SUB:",nodes.Sub)
 
