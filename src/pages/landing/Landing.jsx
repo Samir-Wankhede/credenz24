@@ -9,6 +9,8 @@ import gsap from "gsap"
 import { useGSAP } from '@gsap/react'
 import { easing } from 'maath'
 import { Navigate, redirect,useNavigate} from 'react-router-dom'
+import {WaterSurface } from './WaterSurface.jsx'
+import Ocean from './Ocean.jsx'
 
 export default function Landing() {
     const [explore3D,setExplore3D]=useState(false)
@@ -31,6 +33,7 @@ export default function Landing() {
         console.log("SUBMARINE")
         console.log("current:",sub.current)
         if(exploreUnderwater){
+            console.log('going down')
         gsap.to(nodes.Sub.position,{
             y:-9,
             duration:7,
@@ -85,6 +88,8 @@ export default function Landing() {
        {/* loading page fallback */} 
         <Suspense fallback={<LoadPage/>}>
             <Experience explore={explore3D} exploreUW={exploreUnderwater}/>
+            {/* <WaterSurface/> */}
+            <Ocean/>
             <Environment files={'/models/nightSky_willthiswork.hdr'}
              background
              />

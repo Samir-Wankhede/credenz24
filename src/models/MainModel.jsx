@@ -2,7 +2,7 @@ import { useGLTF } from '@react-three/drei'
 import React from 'react'
 
 export default function MainModel() {
-    const model=useGLTF('/models/credenz_plzBeFinal.glb')
+    const model=useGLTF('/models/try-5.glb')
     console.log('here')
   return (
     <primitive object={model.scene} dispose={null}
@@ -12,4 +12,4 @@ export default function MainModel() {
   )
 }
 
-useGLTF.preload('/models/credenz_plzBeFinal.glb')
+useGLTF.preload('/models/try-5.glb')

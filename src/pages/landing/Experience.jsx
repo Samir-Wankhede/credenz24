@@ -7,7 +7,7 @@ import MainModel from '../../models/MainModel'
 import { Navigate, redirect,useNavigate} from 'react-router-dom'
 
 export default function Experience({explore, exploreUW}) {
-    let camera={x:0,y:2.5,z:11}
+    let camera={x:0,y:4.8,z:20}
     const [rigSpeed, setRigSpeed]=useState(1.5)
     const [cameraPosition, setCameraPosition]=useState(camera)
     const [isPhone,setIsPhone]=useState(isMobile)
@@ -28,7 +28,7 @@ export default function Experience({explore, exploreUW}) {
     }
     function Rig(){
         useFrame((state, delta) => {
-            state.camera.lookAt(0, 0, 0)
+            state.camera.lookAt(0, 1, 0)
             easing.damp3(state.camera.position, [cameraPosition.x + state.mouse.x , cameraPosition.y + state.mouse.y / 1, cameraPosition.z], rigSpeed, delta)
           })
         return null
@@ -69,7 +69,7 @@ export default function Experience({explore, exploreUW}) {
         useFrame((state, delta) => {
             // 5,6.5,13
             
-            !stopDamp && easing.damp3(state.camera.position, [5,6.5,13], 2, delta)
+            !stopDamp && easing.damp3(state.camera.position, [5,13,20], 2, delta)
         })
 
         return <OrbitControls 
