@@ -14,9 +14,10 @@ export default function Experience({explore, exploreUW}) {
 
 
     function GoToUnderWater(){
-        useEffect(()=>{
-            setTimeout(()=>{redirect('/underwater')},3000)
-        },[])
+        useFrame((state,delta)=>{
+                state.camera.lookAt(0,-10,0)
+                easing.damp3(state.camera.position, [0,-300,50] ,3, delta)     
+                })
         return null
     }
     function UnderWater(){
@@ -85,12 +86,12 @@ export default function Experience({explore, exploreUW}) {
         if (explore){
             return <PCController/>
         }
-        if (isPhone){
+        if (isPhone&&!exploreUW){
             return <MobileController/>
         }
         if(exploreUW){
             console.log("Reached")
-            return <UnderWater/>
+            return <><UnderWater/><GoToUnderWater/></>
         }
         else{
             console.log('here2')
@@ -104,7 +105,9 @@ export default function Experience({explore, exploreUW}) {
     <MainModel/>
     <ambientLight intensity={0.5}/>
     <Controller/>
-
+    {/* <UnderWater />
+    <GoToUnderWater /> */}
+    {/* <OrbitControls /> */}
     </>
   )
 }

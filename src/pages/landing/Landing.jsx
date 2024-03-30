@@ -1,4 +1,4 @@
-import { Environment, useProgress, useGLTF } from '@react-three/drei'
+import { Environment, useProgress, useGLTF, PerspectiveCamera } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import React, { Suspense, useEffect, useState,useRef} from 'react'
 import Experience from './Experience'
@@ -9,7 +9,7 @@ import gsap from "gsap"
 import { useGSAP } from '@gsap/react'
 import { easing } from 'maath'
 import { Navigate, redirect,useNavigate} from 'react-router-dom'
-import {WaterSurface } from './WaterSurface.jsx'
+// import {WaterSurface } from './WaterSurface.jsx'
 import Ocean from './Ocean.jsx'
 
 export default function Landing() {
@@ -21,31 +21,39 @@ export default function Landing() {
     const navigate=useNavigate()
     const sub=useRef()
     console.log(sub.current)
-    const { nodes, materials } = useGLTF('/models/credenz_plzBeFinal.glb')
+    const { nodes, materials } = useGLTF('/models/try-5.glb')
     console.log("NODES:",nodes)
     console.log("SUB:",nodes.Sub)
 
-    const redirectToNewPage = () => {
-        navigate('/underwater');
-      };
-
     useGSAP(()=>{
         console.log("SUBMARINE")
-        console.log("current:",sub.current)
         if(exploreUnderwater){
-            console.log('going down')
+            console.log('going down',nodes.Sub.position)
         gsap.to(nodes.Sub.position,{
-            y:-9,
-            duration:7,
+            y:-100,
+            x:0,
+            z:0,
+            duration:3,
             ease:"none",
-            onComplete: redirectToNewPage
+            // onComplete: redirectToNewPage
         })
-        redirect('/underwater')
+        gsap.to(nodes.Sub.rotation,{
+            z:2*Math.PI-Math.PI/2-Math.PI/3,
+            y:0.2,
+            duration:3,
+            ease:"none",
+        })
+        // redirect('/underwater')
     }
     },[exploreUnderwater])
 
     useEffect(()=>{
-        console.log(progress)
+        // nodes.Sub.geometry.scale(
+        //     6.008224010467529,
+        //     6.008224010467529, 
+        //     19.353654861450195)
+        // nodes.Sub.geometry.rotateX(Math.PI/2)
+        // console.log("effect")
         if (progress>=90){
             setShowToggle(true)
         }
@@ -93,7 +101,6 @@ export default function Landing() {
             <Environment files={'/models/nightSky_willthiswork.hdr'}
              background
              />
-            
         </Suspense> 
      </Canvas>  
   </>
