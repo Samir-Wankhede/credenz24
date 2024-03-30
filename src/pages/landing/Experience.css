@@ -39,6 +39,12 @@
   font-weight: 600;
 }
 
+@media (max-width:430px){
+  .toggle-tag{
+    margin-left: 15px;
+  }
+}
+
 @media(max-width: 600px){
   .toggle-div{
     flex-direction: column;

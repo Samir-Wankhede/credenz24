@@ -1,7 +1,8 @@
-import { Float, useGLTF } from '@react-three/drei'
-import { useFrame } from '@react-three/fiber'
+import { Float, Html, useGLTF } from '@react-three/drei'
+import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import gsap from 'gsap'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
+import { Group } from 'three';
 
 function Bubble1() {
     const [hovered, setHovered] = useState(false);
@@ -52,56 +53,68 @@ function Bubble1() {
     //     });
     // };
     
-
+    const viewport=useThree((state)=>state.viewport)
+    const scalingFactor=window.innerWidth/1300
+    console.log(window.innerWidth)
+    console.log(scalingFactor)
+    const mobile=window.innerWidth<=1242
+    console.log("Mobile:",mobile)
   return (
     // <primitive receiveShadow object={model.scene} dispose={null}
     // position={[-12,-10,0]}
     // scale={[0.5,0.5,0.5]}
     // castShadow
     // rotation={[0,4.7*Math.PI/4, 0]}/>
-    <>
+    <group scale={scalingFactor} position={mobile?[-5,-8,4]:null}>
     <Float
     speed={1}
     floatingRange={[-0.05,0.05]}>
 
         <primitive object={aboutUs.scene} dispose={null}
-        
-        position={[-10,-10,-5]}
+        // position={[-10,-10,-5]}
+        position={mobile?[-11,-10,6]:[-9,-10,-5]}
         scale={[0.5,0.5,0.5]}
-        rotation={[0,Math.PI-3,0]}
+        // rotation={[0,Math.PI-3,0]}
+        rotation={mobile?[Math.PI+2.5,Math.PI-3,Math.PI-2.85]:[0,Math.PI-3,0]}
     />/</Float>
 
     <Float
     speed={1}
-    floatingRange={[-0.01,0.01]}>
+    floatingRange={[-0.05,0.05]}>
         <primitive object={contactUs.scene} dispose={null}
-        position={[-20,-18,11]}
+        // position={[-20,-18,11]}
+        position={mobile?[-12,-2,6]:[-15,-14,5]}
         scale={[0.5,0.5,0.5]}
-        rotation={[0,Math.PI/2,0]}
+        // rotation={[0,Math.PI/2,0]}
+        rotation={mobile?[0,Math.PI-2.5,0]:[0,Math.PI-2,0]}
     />
     </Float>
     <Float
     speed={0.2}
     floatingRange={[-0.05,0.05]}>
         <primitive object={events.scene} dispose={null}
-        position={[-19,-10.5,8]}
+        // position={[-19,-10.5,8]}
+        position={mobile?[-15.25,-4,9]:[-19,-9.5,5]}
         scale={[0.5,0.5,0.5]}
-        rotation={[0,Math.PI/2,0]}
+        // rotation={[0,Math.PI/2,0]}
+        rotation={mobile?[0,Math.PI-2,0]:[0,Math.PI/2,0]}
         />
     </Float>
 
     <Float
-    speed={0.2}
+    speed={0.5}
     floatingRange={[-0.05,0.05]}>
 
 
         <primitive object={sponsors.scene} dispose={null}
-        position={[-6,-15,0]}
+        // position={[-6,-15,0]}
+        position={mobile?[-12.12,-12,11]:[-5,-11.5,0]}
         scale={[0.5,0.5,0.5]}
-        rotation={[Math.PI+2,Math.PI+3,0]}
+        // rotation={[Math.PI+2,Math.PI+3,0]}
+        rotation={mobile?[Math.PI+2.5,Math.PI+4,Math.PI-2.65]:[Math.PI+2.5,Math.PI+3,0]}
     />
     </Float>
-    </>
+    </group>
   )
 }
 
