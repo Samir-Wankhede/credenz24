@@ -2,21 +2,16 @@
 import React, { useState } from 'react'
 //import { OrbitControls, useGLTF } from '@react-three/drei'
 //import { isMobile } from 'react-device-detect'
-import MainModel from '../../models/Submarine'
+import Submarine from '../../models/Submarine'
 import { OrbitControls } from '@react-three/drei'
 
 
-export default function Experience() {
-    // let camerapos={x:-3,y:0,z:10}
-    // const [rigSpeed, setRigSpeed]=useState(1.5)
-    // const [cameraPosition, setCameraPosition]=useState(camerapos)
-    // const [isPhone,setIsPhone]=useState(isMobile)
-    // const {camera} = useThree()
+export default function Experience({goUp}) {
 
   return (
     <>
     {/* model */}
-    <MainModel />
+    <Submarine goUp={goUp} />
     <directionalLight color={"white"} intensity={1.5} position={[0,0,20]}/>
     <ambientLight intensity={1.5}/>
     </>

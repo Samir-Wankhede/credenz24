@@ -1,5 +1,5 @@
-import { Environment, useProgress, useGLTF } from '@react-three/drei'
-import { Canvas } from '@react-three/fiber'
+import { Environment, useProgress, useGLTF, OrbitControls } from '@react-three/drei'
+import { Canvas, useThree } from '@react-three/fiber'
 import React, { Suspense, useEffect, useState,useRef} from 'react'
 import Experience from './Experience'
 import LoadPage from '../loading/LoadPage'
@@ -9,8 +9,11 @@ import gsap from "gsap"
 import { useGSAP } from '@gsap/react'
 import { easing } from 'maath'
 import { Navigate, redirect,useNavigate} from 'react-router-dom'
-import {WaterSurface } from './WaterSurface.jsx'
 import Ocean from './Ocean.jsx'
+import Ocean2 from './Ocean2.jsx'
+import Skybox from '../../models/WaterCube.jsx'
+import { CubeTextureLoader, Group } from 'three'
+import Bubble from '../../components/Bubble.jsx'
 
 export default function Landing() {
     const [explore3D,setExplore3D]=useState(false)
@@ -18,38 +21,11 @@ export default function Landing() {
     const [showToggle,setShowToggle]=useState(false)
     const {progress}=useProgress()
 
-    const navigate=useNavigate()
-    const sub=useRef()
-    console.log(sub.current)
-    const { nodes, materials } = useGLTF('/models/credenz_plzBeFinal.glb')
-    console.log("NODES:",nodes)
-    console.log("SUB:",nodes.Sub)
-
-    const redirectToNewPage = () => {
-        navigate('/underwater');
-      };
-
-    useGSAP(()=>{
-        console.log("SUBMARINE")
-        console.log("current:",sub.current)
-        if(exploreUnderwater){
-            console.log('going down')
-        gsap.to(nodes.Sub.position,{
-            y:-9,
-            duration:7,
-            ease:"none",
-            onComplete: redirectToNewPage
-        })
-        redirect('/underwater')
-    }
-    },[exploreUnderwater])
-
     useEffect(()=>{
         console.log(progress)
         if (progress>=90){
             setShowToggle(true)
         }
-        console.log(showToggle)
     },[progress])
 
 
@@ -84,15 +60,27 @@ export default function Landing() {
         </div>
     </div>
     }
-    <Canvas className='canvas'>
+    <Canvas className='canvas' shadows={true}>
        {/* loading page fallback */} 
         <Suspense fallback={<LoadPage/>}>
             <Experience explore={explore3D} exploreUW={exploreUnderwater}/>
-            {/* <WaterSurface/> */}
             <Ocean/>
-            <Environment files={'/models/nightSky_willthiswork.hdr'}
+            <Ocean2/> 
+           
+            <Bubble layer={1}/>
+            {/* <Skybox/> */}
+             <Environment files={'/models/nightSky_willthiswork.hdr'}
              background
+             layer={0}
              />
+            
+           
+             
+            
+           
+    
+            <directionalLight castShadow position={[2,20,0]} intensity={0.5}/>
+            
             
         </Suspense> 
      </Canvas>  

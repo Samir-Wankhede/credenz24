@@ -21,8 +21,9 @@ export default function Experience({explore, exploreUW}) {
     }
     function UnderWater(){
         useFrame((state, delta) => {
-          state.camera.lookAt(-6,0.5,9)
-          easing.damp3(state.camera.position, [-5,0.5,10] ,0.5, delta)
+          state.camera.lookAt(-6,-6,9)
+          easing.damp3(state.camera.position, [-5,-5,10] ,0.5, delta)
+ 
         })
         return null
     }
@@ -46,7 +47,7 @@ export default function Experience({explore, exploreUW}) {
 
     function MobileController(){
         useFrame((state,delta)=>{
-            easing.damp3(state.camera.position, [-3,4,16], 2, delta)
+            easing.damp3(state.camera.position, [-6,7,24], 2, delta)
         })
         return <OrbitControls
         minAzimuthAngle={(-Math.PI / 180) * 60}
@@ -73,8 +74,8 @@ export default function Experience({explore, exploreUW}) {
         })
 
         return <OrbitControls 
-        minPolarAngle={(Math.PI / 180) * 30}
-        maxPolarAngle={(Math.PI / 180) * 80}
+        // minPolarAngle={(Math.PI / 180) * 30}
+        // maxPolarAngle={(Math.PI / 180) * 80}
         enableDamping
         maxDistance={30}
         minDistance={13}
@@ -89,11 +90,11 @@ export default function Experience({explore, exploreUW}) {
             return <MobileController/>
         }
         if(exploreUW){
-            console.log("Reached")
+         
             return <UnderWater/>
         }
         else{
-            console.log('here2')
+      
             return <Rig/>
         }
     }
@@ -101,8 +102,9 @@ export default function Experience({explore, exploreUW}) {
   return (
     <>
     {/* model */}
-    <MainModel/>
-    <ambientLight intensity={0.5}/>
+    <MainModel exploreUnderwater={exploreUW} />
+    {/* <ambientLight intensity={0.5}/> */}
+    
     <Controller/>
 
     </>

@@ -25,17 +25,18 @@ function Ocean() {
       sunColor: 0xeb8934,
       waterColor: 0x0064b5,
       distortionScale: 40,
-      fog: false,
+      fog: true,
       format: gl.encoding,
     }),
     [gl.encoding, waterNormals]
   );
   useFrame(() => {
     const material = ref?.current?.material 
-    material.uniforms.time.value += 0.006;
+    material.uniforms.time.value += 0.004;
 })
   return (
     <water
+      receiveShadow
       ref={ref}
       args={[geom, config]}
       rotation-x={-Math.PI / 2}

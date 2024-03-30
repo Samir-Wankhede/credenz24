@@ -6,7 +6,7 @@ import LoadPage from '../loading/LoadPage'
 import './Experience.css'
 
 export default function UnderWater() {
-    const [explore,setExplore]=useState(false)
+    const [goUp,setGoUp]=useState(false)
     const [showToggle,setShowToggle]=useState(false)
     const {progress}=useProgress()
 
@@ -20,8 +20,8 @@ export default function UnderWater() {
         <div className='toggle-div'>
             <div className='container'>
                 <input type='checkbox' name='checkbox' value='checkbox' 
-                checked={explore} id='checkbox'
-                onChange={(e)=>setExplore(e.target.checked)}/>
+                checked={goUp} id='checkbox'
+                onChange={(e)=>setGoUp(e.target.checked)}/>
                 <label className="label" htmlFor="checkbox" ></label>
 
                 
@@ -30,7 +30,7 @@ export default function UnderWater() {
         </div>
     }
     <Canvas className='canvas' camera={{ position: [0, 0, 20] }}>
-        <Experience  />
+        <Experience  goUp={goUp}/>
     </Canvas>
   </>
   )

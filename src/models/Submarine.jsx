@@ -3,26 +3,45 @@ import { isMobile } from 'react-device-detect'
 import { useFrame } from '@react-three/fiber'
 import { useGLTF } from '@react-three/drei'
 import gsap from "gsap"
+import { useNavigate } from 'react-router-dom'
 
 
-export default function Model(props) {
+export default function Submarine({goUp}) {
   const [isSinking, setIsSinking] = useState(true);
   //const { nodes, materials } = useGLTF('/models/credenz_baked.glb')
   const model=useGLTF('/models/onlySub.glb')
   const [rigSpeed, setRigSpeed]=useState(2.5)
   const ref=useRef()
+  const [initialPosition, setInitialPosition]=useState()
+  const [initialRotation, setInitialRotation]=useState()
+  const navigate=useNavigate()
   const grpRef = useRef()
   useEffect(() => {
     //droping animation is only when use effect fires
-    console.log("hereinsub")
+    
+    
     const timeout = setTimeout(() => {
         setIsSinking(false) 
         setRigSpeed(1.5);
     }, 2500);
+    setInitialPosition(ref.current.position)
+    setInitialRotation(ref.current.rotation)
+    console.log(initialPosition, initialRotation)
     // Cleanup function
     return () => clearTimeout(timeout);
   }, []);
-  
+
+function GoUPFunction(){
+  useFrame((state, delta) => {
+    gsap.to(ref.current.position,{y:15,
+      duration:rigSpeed, 
+      ease: 'none', 
+      onComplete: navigate('/')})
+    gsap.to(ref.current.rotation,{y:Math.PI/2,duration:rigSpeed}) 
+
+    })
+    return null
+}
 function InitialSink (){
     useFrame((state, delta) => {
         isSinking&&gsap.to(ref.current.position,{y:0,duration:rigSpeed})
@@ -38,24 +57,14 @@ function InitialSink (){
   }
   return (
     <>
-    {/* <group {...props} dispose={null}>
-        <mesh 
-        geometry={nodes.Sub.geometry} 
-        material={nodes.Sub.material} 
-        scale={[1,3,1]} 
-        position={[0,20,0]}
-        rotation={[Math.PI/2,0,-Math.PI/2]}
-        ref={ref}
-        />
-
-    </group> */}
     <primitive ref={ref} object={model.scene} dispose={null}
     scale={[0.15,0.15,0.15]}
     position={[0,20,0]}
     rotation={[0,Math.PI/2,0]}
     />
     <InitialSink />
-    <UnderWaterMove/>
+    {!goUp &&<UnderWaterMove/>}
+    {goUp && <GoUPFunction/>}
     </>
   )
 }

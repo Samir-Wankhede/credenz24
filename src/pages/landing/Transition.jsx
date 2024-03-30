@@ -3,7 +3,7 @@ import "./Transition.css"
 import { Html } from '@react-three/drei'
 
 const Transition = () => {
-    console.log("Transitioning")
+
   return (
     <Html>
         <section className="sticky">
