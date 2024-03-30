@@ -7,22 +7,23 @@ import MainModel from '../../models/MainModel'
 import { Navigate, redirect,useNavigate} from 'react-router-dom'
 
 export default function Experience({explore, exploreUW}) {
-    let camera={x:0,y:4.8,z:20}
+    let camera={x:-7,y:6,z:24}
     const [rigSpeed, setRigSpeed]=useState(1.5)
     const [cameraPosition, setCameraPosition]=useState(camera)
     const [isPhone,setIsPhone]=useState(isMobile)
 
 
-    function GoToUnderWater(){
-        useEffect(()=>{
-            setTimeout(()=>{redirect('/underwater')},3000)
-        },[])
-        return null
-    }
+    // function GoToUnderWater(){
+    //     useFrame((state,delta)=>{
+    //         state.camera.lookAt(0,-10,0)
+    //         easing.damp3(state.camera.position, [0,-300,50], 3, delta)
+    //     })
+    //     return null
+    // }
     function UnderWater(){
         useFrame((state, delta) => {
-          state.camera.lookAt(-6,-6,9)
-          easing.damp3(state.camera.position, [-5,-5,10] ,0.5, delta)
+          state.camera.lookAt(-6,-8.73,9)
+          easing.damp3(state.camera.position, [-5,-8,10] ,0.5, delta)
  
         })
         return null
@@ -47,7 +48,7 @@ export default function Experience({explore, exploreUW}) {
 
     function MobileController(){
         useFrame((state,delta)=>{
-            easing.damp3(state.camera.position, [-6,7,24], 2, delta)
+            easing.damp3(state.camera.position, [-8,15,23], 2, delta)
         })
         return <OrbitControls
         minAzimuthAngle={(-Math.PI / 180) * 60}
@@ -86,15 +87,14 @@ export default function Experience({explore, exploreUW}) {
         if (explore){
             return <PCController/>
         }
-        if (isPhone){
+        if (isPhone && !exploreUW){
             return <MobileController/>
         }
         if(exploreUW){
          
-            return <UnderWater/>
+            return <><UnderWater/></>
         }
         else{
-      
             return <Rig/>
         }
     }

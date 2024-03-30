@@ -13,7 +13,8 @@ import Ocean from './Ocean.jsx'
 import Ocean2 from './Ocean2.jsx'
 import Skybox from '../../models/WaterCube.jsx'
 import { CubeTextureLoader, Group } from 'three'
-import Bubble from '../../components/Bubble.jsx'
+import Bubble1 from '../../models/Bubble1.jsx'
+import UnderwaterBubbles from '../../components/Bubbles.jsx'
 
 export default function Landing() {
     const [explore3D,setExplore3D]=useState(false)
@@ -66,21 +67,19 @@ export default function Landing() {
             <Experience explore={explore3D} exploreUW={exploreUnderwater}/>
             <Ocean/>
             <Ocean2/> 
-           
-            <Bubble layer={1}/>
+            {/* <fog color={'#161616'} attach={'fog'} near={2} far={20}/> */}
+            {/* <Bubble layer={10}/> */}
             {/* <Skybox/> */}
-             <Environment files={'/models/nightSky_willthiswork.hdr'}
+            {/* <Bubble2/> */}
+            <Bubble1/>
+            <UnderwaterBubbles count={500}/>
+             <Environment 
+             files={'/models/nightSky_underWater.hdr'}
              background
-             layer={0}
              />
-            
-           
-             
-            
-           
-    
-            <directionalLight castShadow position={[2,20,0]} intensity={0.5}/>
-            
+
+             <ambientLight intensity={0.5}/>
+            <directionalLight  position={[2,20,0]} intensity={0.5}/>
             
         </Suspense> 
      </Canvas>  

@@ -23,7 +23,7 @@ function Ocean2() {
       waterNormals,
       sunDirection: new THREE.Vector3(),
       sunColor: 0xeb8934,
-      waterColor: 0x0064b5,
+      waterColor: 0x2E8B57,
       distortionScale: 40,
       fog: false,
       format: gl.encoding,
@@ -32,9 +32,10 @@ function Ocean2() {
   );
   useFrame(() => {
     const material = ref?.current?.material 
-    material.uniforms.time.value += 0.006;
+    material.uniforms.time.value += 0.008;
 })
   return (
+    <>
     <water
       receiveShadow
       ref={ref}
@@ -42,6 +43,10 @@ function Ocean2() {
       rotation-x={-Math.PI*3 / 2}
       position={[0, -1, 0]}
     />
+    <ambientLight intensity={0.5} color={0xffffff} />
+    <directionalLight intensity={1} color={0xffffff} lookAt={[0,0,0]} position={[0, -30, 0]} />
+
+    </>
   );
 }
 
