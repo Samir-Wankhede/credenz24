@@ -72,9 +72,9 @@ export default function Landing() {
             {/* <Skybox/> */}
             {/* <Bubble2/> */}
             <Bubble1/>
-            <UnderwaterBubbles count={500}/>
+            <UnderwaterBubbles count={700}/>
              <Environment 
-             files={'/models/nightSky_underWater.hdr'}
+             files={'/models/nightSky_underwater-1.hdr'}
              background
              />
 

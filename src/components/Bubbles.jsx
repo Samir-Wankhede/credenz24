@@ -17,7 +17,7 @@ function UnderwaterBubbles({ count }) {
             // Move the bubble upwards
             bubble.position.y += 0.05;
             // Reset position if the bubble goes above the water surface
-            if (bubble.position.y > 5) {
+            if (bubble.position.y > 0.3) {
                 bubble.position.set(
                     getRandomInRange(-100,100),
                     getRandomInRange(-200,0),
@@ -34,11 +34,11 @@ function UnderwaterBubbles({ count }) {
                 <Sphere
                     key={index}
                     ref={(ref) => (bubbles.current[index] = ref)}
-                    args={[0.3, 16, 16]}
+                    args={[0.4, 16, 16]}
                     position={[
-                        getRandomInRange(-100, 100),
+                        getRandomInRange(-50, 50),
                         getRandomInRange(-200, 0),
-                        getRandomInRange(-100, 100)
+                        getRandomInRange(-50, 50)
                     ]}
                 >
                     <meshPhongMaterial color="white" transparent opacity={0.2} />

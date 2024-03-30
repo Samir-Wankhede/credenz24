@@ -1,7 +1,7 @@
 
 .toggle-div{
     position: absolute;
- 
+
     z-index: 2;
     display: flex;
     align-items: center;
@@ -9,6 +9,11 @@
     gap: 20%;
     bottom: 0;
     margin-bottom: 5%;
+   
+    /* display: flex;
+  justify-content: center;
+  align-items: center; */
+ 
 
 }
 
