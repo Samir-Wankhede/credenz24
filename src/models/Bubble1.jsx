@@ -57,8 +57,26 @@ function Bubble1() {
     const scalingFactor=window.innerWidth/1300
     console.log(window.innerWidth)
     console.log(scalingFactor)
-    const mobile=window.innerWidth<=1242
-    console.log("Mobile:",mobile)
+    const mobile=window.innerWidth<=430
+    let p=[[-9,-10,-5],[-15,-14,5],[-19,-9.5,5],[-5,-11.5,0]]
+    if(window.innerWidth<=1245 && window.innerWidth>940){
+        p=[[-13,-11.75,-1],[-18,-18,7],[-20,-13,11],[-9,-14,0]]
+    }
+    else if(window.innerWidth<=940 && window.innerWidth>847){
+        p=[[-14,-12,-1],[-20,-19,8],[-25,-16,5],[-11,-18,0]]
+    }
+    else if(window.innerWidth<=847 && window.innerWidth>630){
+        p=[[-19,-19,2],[-25,-26,7],[-25,-19,9],[-20,-15,5]]
+    }
+    else if(window.innerWidth<=630 && window.innerWidth>550){
+        p=[[-20,-19,2],[-29,-29,11],[-25,-19,12],[-20,-18,10]]
+    }
+    else if(window.innerWidth<=550 && window.innerWidth>430){
+        p=[[-25,-21,2],[-35,-29,12],[-25,-24,12],[-24,-25,10]]
+    }
+    else if(window.innerWidth<=430){
+        p=[[-11,-10,6],[-12,-2,6],[-15.25,-4,9],[-12.12,-12,11]]
+    }
   return (
     // <primitive receiveShadow object={model.scene} dispose={null}
     // position={[-12,-10,0]}
@@ -71,10 +89,11 @@ function Bubble1() {
     floatingRange={[-0.05,0.05]}>
 
         <primitive object={aboutUs.scene} dispose={null}
-        // position={[-10,-10,-5]}
-        position={mobile?[-11,-10,6]:[-9,-10,-5]}
+        // position={[-19,-19,2]}
+        // position={mobile?[-11,-10,6]:[-9,-10,-5]}
+        position={p[0]}
         scale={[0.5,0.5,0.5]}
-        // rotation={[0,Math.PI-3,0]}
+        // rotation={[Math.PI+3,Math.PI-2,0]}
         rotation={mobile?[Math.PI+2.5,Math.PI-3,Math.PI-2.85]:[0,Math.PI-3,0]}
     />/</Float>
 
@@ -82,8 +101,9 @@ function Bubble1() {
     speed={1}
     floatingRange={[-0.05,0.05]}>
         <primitive object={contactUs.scene} dispose={null}
-        // position={[-20,-18,11]}
-        position={mobile?[-12,-2,6]:[-15,-14,5]}
+        // position={[-25,-26,7]}
+        // position={mobile?[-12,-2,6]:[-15,-14,5]}
+        position={p[1]}
         scale={[0.5,0.5,0.5]}
         // rotation={[0,Math.PI/2,0]}
         rotation={mobile?[0,Math.PI-2.5,0]:[0,Math.PI-2,0]}
@@ -93,8 +113,9 @@ function Bubble1() {
     speed={0.2}
     floatingRange={[-0.05,0.05]}>
         <primitive object={events.scene} dispose={null}
-        // position={[-19,-10.5,8]}
-        position={mobile?[-15.25,-4,9]:[-19,-9.5,5]}
+        // position={[-25,-19,9]}
+        // position={mobile?[-15.25,-4,9]:[-19,-9.5,5]}
+        position={p[2]}
         scale={[0.5,0.5,0.5]}
         // rotation={[0,Math.PI/2,0]}
         rotation={mobile?[0,Math.PI-2,0]:[0,Math.PI/2,0]}
@@ -107,8 +128,9 @@ function Bubble1() {
 
 
         <primitive object={sponsors.scene} dispose={null}
-        // position={[-6,-15,0]}
-        position={mobile?[-12.12,-12,11]:[-5,-11.5,0]}
+        // position={[-20,-21,5]}
+        // position={mobile?[-12.12,-12,11]:[-5,-11.5,0]}
+        position={p[3]}
         scale={[0.5,0.5,0.5]}
         // rotation={[Math.PI+2,Math.PI+3,0]}
         rotation={mobile?[Math.PI+2.5,Math.PI+4,Math.PI-2.65]:[Math.PI+2.5,Math.PI+3,0]}
