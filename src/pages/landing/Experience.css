@@ -1,19 +1,27 @@
 
 .toggle-div{
     position: absolute;
+
     z-index: 2;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 40%;
+    gap: 20%;
     bottom: 0;
     margin-bottom: 5%;
+   
+    /* display: flex;
+  justify-content: center;
+  align-items: center; */
+ 
 
 }
 
 .controller{
   display: flex;
   justify-content: center;
+  align-items: center;
+ 
 }
 
 .switch-container{
@@ -37,12 +45,12 @@
     gap:20%;
     align-items: flex-start;
     width: 50%;
-    left: 30%;
+    /* left: 30%; */
 
   }
   .switch-container{
     flex-direction: row;
-    gap: 10%;
+    /* gap: 10%; */
 
   }
 }

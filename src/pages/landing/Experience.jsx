@@ -1,28 +1,21 @@
-import { useFrame, usePointerEvents } from '@react-three/fiber'
+import { useFrame } from '@react-three/fiber'
 import React, { useState, useEffect } from 'react'
 import {easing} from 'maath'
-import { OrbitControls, useGLTF } from '@react-three/drei'
+import { OrbitControls } from '@react-three/drei'
 import { isMobile } from 'react-device-detect'
 import MainModel from '../../models/MainModel'
-import { Navigate, redirect,useNavigate} from 'react-router-dom'
 
 export default function Experience({explore, exploreUW}) {
-    let camera={x:0,y:4.8,z:20}
+    let camera={x:-7,y:6,z:24}
     const [rigSpeed, setRigSpeed]=useState(1.5)
     const [cameraPosition, setCameraPosition]=useState(camera)
     const [isPhone,setIsPhone]=useState(isMobile)
 
-
-    function GoToUnderWater(){
-        useEffect(()=>{
-            setTimeout(()=>{redirect('/underwater')},3000)
-        },[])
-        return null
-    }
     function UnderWater(){
         useFrame((state, delta) => {
-          state.camera.lookAt(-6,0.5,9)
-          easing.damp3(state.camera.position, [-5,0.5,10] ,0.5, delta)
+          state.camera.lookAt(-6,-8.73,9)
+          easing.damp3(state.camera.position, [-5,-8,10] ,0.5, delta)
+ 
         })
         return null
     }
@@ -46,7 +39,7 @@ export default function Experience({explore, exploreUW}) {
 
     function MobileController(){
         useFrame((state,delta)=>{
-            easing.damp3(state.camera.position, [-3,4,16], 2, delta)
+            easing.damp3(state.camera.position, [-8,15,23], 2, delta)
         })
         return <OrbitControls
         minAzimuthAngle={(-Math.PI / 180) * 60}
@@ -85,15 +78,14 @@ export default function Experience({explore, exploreUW}) {
         if (explore){
             return <PCController/>
         }
-        if (isPhone){
+        if (isPhone && !exploreUW){
             return <MobileController/>
         }
-        if(exploreUW){
-            console.log("Reached")
-            return <UnderWater/>
+        if(exploreUW && !explore){
+         
+            return <><UnderWater/></>
         }
         else{
-            console.log('here2')
             return <Rig/>
         }
     }
@@ -101,8 +93,9 @@ export default function Experience({explore, exploreUW}) {
   return (
     <>
     {/* model */}
-    <MainModel/>
-    <ambientLight intensity={0.5}/>
+    <MainModel exploreUnderwater={exploreUW} />
+    {/* <ambientLight intensity={0.5}/> */}
+    
     <Controller/>
 
     </>

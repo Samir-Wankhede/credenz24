@@ -9,29 +9,36 @@ export default function LoadPage() {
   },[percent,progress])
   return (
     <Html>
-    <>
-       
-        <div className='bg'>
-          <div className='circle'>
-              <div className='wave'></div>
-          </div>
-          <div className='percent'>
-            <p>{percent} % </p>
-          </div>
+      <div className='container'>
+      <div className="submarine">
+      <div className ="top">
+        <div className="pipe">
+          <div className="light"></div>
         </div>
-        <div id="background-wrap">
-          <div class="bubble x1"></div>
-          <div class="bubble x2"></div>
-          <div class="bubble x3"></div>
-          <div class="bubble x4"></div>
-          <div class="bubble x5"></div>
-          <div class="bubble x6"></div>
-          <div class="bubble x7"></div>
-          <div class="bubble x8"></div>
-          <div class="bubble x9"></div>
-          <div class="bubble x10"></div>
       </div>
-      </>
-    </Html> 
+      <div className="window window-1">
+        <div className="shine"></div>
+      </div>
+      <div className="window window-2">
+        <div className="shine"></div>
+      </div>
+      <div className="shadow"></div>
+      <div className="propeller">
+        <div className="back"></div>
+        <div className="wing"></div>
+        <div className="bubble bubble-1"></div>
+        <div className="bubble bubble-2"></div>
+        <div className="bubble bubble-3"></div>
+      </div>
+    </div>
+    <div className="wave">
+      <div className="wave1"></div>
+      <div className="wave2"></div>
+    </div>
+    <div className='progress'>
+        <p>Loading... {progress} %</p>
+    </div>
+    </div>
+   </Html> 
   )
 }
